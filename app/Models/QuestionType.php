@@ -9,15 +9,19 @@ class QuestionType extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
-
     protected $fillable = [
        
         'name',
         'keyname',
     ];
 
-    public function question()
+    /**
+     * Returns questions associates with this questionType
+     * 
+     * @Return hasMany
+     * 
+     */
+    public function questions()
     {
         return $this->hasMany(Question::class);
     }

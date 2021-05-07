@@ -9,26 +9,43 @@ class Response extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
-
     protected $fillable = [
         
         'survey_id',
-        'responder_id',
+        'user_id',
     ];
 
-    public function question()
-    {
-        return $this->belongsTo(Question::class);
-    }
-
-    public function answer()
+    /**
+     * Returns all the answers associated with this specific response
+     * 
+     * @Return hasMany
+     * 
+     */
+    public function responseAnswers()
     {
         return $this->hasMany(ResponseAnswer::class);
     }
 
+    /**
+     * Returns the survey where this response belongs to
+     * 
+     * @Return belongsTo
+     * 
+     */
     public function survey()
     {
         return $this->belongsTo(Survey::class);
     }
+
+    /**
+     * Returns the user associated with this response
+     * 
+     * @Return belongsTo
+     * 
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

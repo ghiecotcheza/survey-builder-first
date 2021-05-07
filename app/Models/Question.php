@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
-    
-    protected $primaryKey = 'id';
 
     protected $fillable = [
        
@@ -19,22 +17,46 @@ class Question extends Model
         'question_type_id',
     ];
 
+    /**
+     * Returns the survey which this question belongs to
+     * 
+     * @Return belongsTo
+     * 
+     */
     public function survey()
     {
         return $this->belongsTo(Survey::class);
     }
 
-    public function option()
+    /**
+     * Returns the options associated with this question
+     * 
+     * @Return hasMany
+     * 
+     */
+    public function questionOptions()
     {
         return $this->hasMany(QuestionOption::class);
     }
 
-    public function response()
+    /**
+     * Returns the responses made by the user for this question
+     * 
+     * @Return hasMany
+     * 
+     */
+    public function responseAnswers()
     {
-        return $this->hasMany(Response::class);
+        return $this->hasMany(ResponseAnswer::class);
     }
-
-    public function type()
+ 
+    /**
+     * Returns the questionType of this question
+     * 
+     * @Return belongsTo
+     * 
+     */
+    public function questionType()
     {
         return $this->belongsTo(QuestionType::class);
     }

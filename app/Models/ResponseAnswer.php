@@ -9,8 +9,6 @@ class ResponseAnswer extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
-
     protected $fillable = [
 
         'response_id',
@@ -18,13 +16,27 @@ class ResponseAnswer extends Model
         'answer'
     ];
 
+    
+    /**
+     * Returns the question where this responseAnswer belongs to
+     *
+     * @Return belongsTo
+     *
+     */
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
+
+    /**
+    * Returns the response where this answer belongs to
+    *
+    * @Return belongsTo
+    *
+    */
     public function response()
     {
         return $this->belongsTo(Response::class);
     }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
+

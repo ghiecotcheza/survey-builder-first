@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Survey extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'id';
 
     protected $fillable = [
         'title',
@@ -20,17 +19,35 @@ class Survey extends Model
         'published_at',
     ];
 
+     /**
+     * Returns the questions associated with this survey
+     * 
+     * @Return hasMany
+     * 
+     */
     public function questions()
     {
         return $this->hasMany(Question::class);
     }
 
+    /**
+     * Returns a single user associated to this survey
+     * 
+     * @Return belongsTo
+     * 
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function response()
+     /**
+     * Returns many responses associated the survey
+     * 
+     * @Return hasMany
+     * 
+     */
+    public function responses()
     {
         return $this->hasMany(Response::class);
     }

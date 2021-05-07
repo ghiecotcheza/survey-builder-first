@@ -9,14 +9,18 @@ class QuestionOption extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
-
     protected $fillable = [
        
         'question_id',
         'option',
     ];
 
+    /**
+     * Returns the question which this questionOptions belongs to
+     * 
+     * @Return belongsTo
+     * 
+     */
     public function question()
     {
         return $this->belongsTo(Question::class);
